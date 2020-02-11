@@ -5,7 +5,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import * as HttpStatus from 'http-status-codes';
 
 import RenderTask from './RenderTask';
@@ -13,6 +13,7 @@ import RenderTask from './RenderTask';
 interface IProps {
     data: [];
     token: string;
+    shareListInfo: any;
 }
 
 interface IState {
@@ -21,7 +22,7 @@ interface IState {
     tasks: any;
 }
 
-class RenderList extends Component<IProps, IState> {  
+class RenderList extends Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.handleListChange = this.handleListChange.bind(this);
@@ -29,20 +30,19 @@ class RenderList extends Component<IProps, IState> {
         this.state = {
             listid: '',
             valid: true,
-            tasks: []
+            tasks: [],
         };
     }
 
     async componentDidMount() {
     }
 
-    async componentWillMount() {  
+    async componentWillMount() {
     }
 
     async handleListChange (event: any) {
         await this.setState({
             listid: event.target.value,
-            valid: true
         });
         console.log('ids: ', this.state.listid)
         await this.getListTasks()
@@ -50,7 +50,7 @@ class RenderList extends Component<IProps, IState> {
     };
 
     async getListTasks () {
-        let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=get_list_tasks&token=' 
+        let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=get_list_tasks&token='
         + this.props.token + '&list_id=' + this.state.listid
         console.log('url: ', url)
 
@@ -63,38 +63,45 @@ class RenderList extends Component<IProps, IState> {
 
         // Read response
         let response = await result.json();
-  
-        if (response.response === 'invalid token' || response.response === 'invalid list id') {
+
+        if (response.response === 'invalid token') {
             console.log('tasks invalid', this.state.tasks)
         } else {
             await this.setState({
-                valid: true, 
+                valid: true,
                 tasks: response.response.items
             })
             console.log('tasks',this.state.tasks)
-        } 
+        }
+
+        this.props.shareListInfo(this.state.listid, this.state.tasks)
     }
-    
 
     render() {
-        if (!this.state.valid) {
-            return <Redirect to="/" />
-        }
+        // if (!this.state.valid) {
+        //     return <Redirect to="/" />
+        // }
+
         return (
             <Container>
+                    <FormControl component="fieldset">
 
-                <FormControl component="fieldset">
-                    <RadioGroup>
-                        {this.props.data.map((list: any, index: any) => {
-                                return (
-                                    <FormControlLabel value={list.id} control={<Radio />} onClick={this.handleListChange} label={list.name} />
-                                );
-                        })}
+                        <RadioGroup>
+                            {this.props.data.map((list: any, index: any) => {
+                                        return (
+                                            <FormControlLabel value={list.id} control={<Radio />} onClick={this.handleListChange} label={list.name} />
+                                        );
+                            })}
 
+                        </RadioGroup>
+                    </FormControl>
+                    {(this.state.tasks.length != 0) ?
                         <RenderTask data={this.state.tasks}/>
-                        
-                    </RadioGroup>
-                </FormControl>
+                    :
+
+                    <h3>No tasks present.</h3>
+                    
+                    }
             </Container>
         );
     }

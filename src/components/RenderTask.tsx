@@ -13,10 +13,9 @@ interface IState {
     taskid: ''
 }
 
-class RenderTask extends Component<IProps, IState> {  
+class RenderTask extends Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
-        this.handleListChange = this.handleListChange.bind(this);
         this.state = {
             taskid: ''
 
@@ -26,15 +25,10 @@ class RenderTask extends Component<IProps, IState> {
     async componentDidMount() {
     }
 
-    async componentWillMount() {  
+    async componentWillMount() {
     }
 
-    async handleListChange (event: any) {
-        await this.setState({
-            taskid: event.target.value
-        });
-    };
-    
+
 
     render() {
         return (
