@@ -150,19 +150,24 @@ class RenderTaskComplete extends Component<IProps, IState> {
                 <h3 style={{ marginTop: -10, marginBottom: 5 }}>
                     Tasks for the list:
                 </h3>
-                <FormControl component="fieldset">
-                    <RadioGroup>
-                        {this.props.data.map((task: any, index: any) => {
-                                return (
-                                    <div style={{paddingTop: 10}}>
-                                        <FormControlLabel value={task.id} control={<Radio />} onClick={this.handleTaskChange} label={task.name} />
-                                        <p style={{margin: 5, marginLeft: 40}}>Finished at: {task.finished_at}</p>
-                                    </div>
 
-                                );
-                        })}
-                    </RadioGroup>
-                </FormControl>
+                {(this.props.data === undefined || this.props.data === [] || this.props.data === null || this.props.data.length === 0) ?
+                    null
+                    :
+                    <FormControl component="fieldset">
+                        <RadioGroup>
+                            {this.props.data.map((task: any, index: any) => {
+                                    return (
+                                        <div style={{paddingTop: 10}}>
+                                            <FormControlLabel value={task.id} control={<Radio />} onClick={this.handleTaskChange} label={task.name} />
+                                            <p style={{margin: 5, marginLeft: 40}}>Finished at: {task.finished_at}</p>
+                                        </div>
+
+                                    );
+                            })}
+                        </RadioGroup>
+                    </FormControl>
+                }
 
                 <div>
                     <div>

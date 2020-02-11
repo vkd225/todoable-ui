@@ -147,7 +147,10 @@ class EditList extends Component<IProps, IState> {
 
                 </div>
 
+
+                
                 <RenderTaskComplete data={this.props.data} token={this.props.token} listId={this.props.listId}/>
+                
             </Container>
         );
     }
