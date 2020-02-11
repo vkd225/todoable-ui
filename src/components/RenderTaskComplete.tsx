@@ -56,7 +56,6 @@ class RenderTaskComplete extends Component<IProps, IState> {
     async postTask (){
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=post_task_in_list&token='
         + this.props.token + '&list_id=' + this.props.listId + '&name=' + this.state.taskName
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'
@@ -84,7 +83,6 @@ class RenderTaskComplete extends Component<IProps, IState> {
     async completeTask (){
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=complete_task_in_list&token='
         + this.props.token + '&list_id=' + this.props.listId + '&item_id=' + this.state.taskid
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'
@@ -111,7 +109,6 @@ class RenderTaskComplete extends Component<IProps, IState> {
     async deleteTask (){
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=delete_task_in_list&token='
         + this.props.token + '&list_id=' + this.props.listId + '&item_id=' + this.state.taskid
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'

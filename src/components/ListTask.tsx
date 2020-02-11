@@ -44,7 +44,6 @@ class ListTask extends Component<IProps, IState> {
     async getlist () {
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=get_lists&token='
         + this.props.token
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'

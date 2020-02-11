@@ -46,7 +46,6 @@ class RenderList extends Component<IProps, IState> {
 
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=post_list&token='
         + this.props.token + '&name=' + this.state.name
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'
@@ -67,7 +66,6 @@ class RenderList extends Component<IProps, IState> {
                 valid: true,
                 nameTaken: 'posted'
             })
-            console.log('name',this.state.name)
         }
     }
 

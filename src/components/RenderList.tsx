@@ -44,7 +44,6 @@ class RenderList extends Component<IProps, IState> {
         await this.setState({
             listid: event.target.value,
         });
-        console.log('ids: ', this.state.listid)
         await this.getListTasks()
 
     };
@@ -52,7 +51,6 @@ class RenderList extends Component<IProps, IState> {
     async getListTasks () {
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=get_list_tasks&token='
         + this.props.token + '&list_id=' + this.state.listid
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'
@@ -71,7 +69,6 @@ class RenderList extends Component<IProps, IState> {
                 valid: true,
                 tasks: response.response.items
             })
-            console.log('tasks',this.state.tasks)
         }
 
         this.props.shareListInfo(this.state.listid, this.state.tasks)
@@ -95,11 +92,10 @@ class RenderList extends Component<IProps, IState> {
 
                         </RadioGroup>
                     </FormControl>
-                    {(this.state.tasks.length !== 0) ?
-                        <RenderTask data={this.state.tasks}/>
+                    {(this.state.tasks === undefined || this.state.tasks === '' || this.state.tasks === null || this.state.tasks.length === 0) ?
+                        <h3>No tasks present.</h3>
                     :
-
-                    <h3>No tasks present.</h3>
+                    <RenderTask data={this.state.tasks}/>
                     
                     }
             </Container>

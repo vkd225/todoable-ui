@@ -46,7 +46,6 @@ class EditList extends Component<IProps, IState> {
     async updateList () {
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=update_list&token='
         + this.props.token + '&name=' + this.state.updateListName + '&list_id=' + this.props.listId
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'
@@ -75,7 +74,6 @@ class EditList extends Component<IProps, IState> {
     async deleteList (){
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=delete_list&token='
         + this.props.token + '&list_id=' + this.props.listId
-        console.log('url: ', url)
 
         let result = await fetch(url, {
             method: 'GET'

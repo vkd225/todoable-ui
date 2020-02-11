@@ -47,8 +47,8 @@ class Login extends Component<IProps, IState> {
             username: this.state.username, 
             password: this.state.password
         })
-        console.log('user: ', this.state.username)
-        console.log('pass: ', this.state.password)
+        // console.log('user: ', this.state.username)
+        // console.log('pass: ', this.state.password)
         let url = 'https://xwyir2jma1.execute-api.us-east-1.amazonaws.com/prod/todos?function=login&username=' + 
             this.state.username + '&password=' + this.state.password
 
@@ -77,7 +77,7 @@ class Login extends Component<IProps, IState> {
                         valid: true, 
                         token: response.response.token
                     })
-                    console.log('TOKEN: ', this.state.token)
+                    // console.log('TOKEN: ', this.state.token)
                 }
             } catch (error) {
                     await this.setState({
