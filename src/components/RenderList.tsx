@@ -95,7 +95,7 @@ class RenderList extends Component<IProps, IState> {
 
                         </RadioGroup>
                     </FormControl>
-                    {(this.state.tasks.length != 0) ?
+                    {(this.state.tasks.length !== 0) ?
                         <RenderTask data={this.state.tasks}/>
                     :
 
